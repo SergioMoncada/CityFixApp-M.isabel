@@ -1,0 +1,47 @@
+🔑 Gestión de Variables de Entorno (¡El cambio clave!)
+.env: Este archivo ha aparecido en la raíz del proyecto. Contiene las variables de entorno locales (credenciales de bases de datos, llaves de API, puertos, etc.).
+
+Nota para la auditoría: La existencia de este archivo explica por qué en el código se usa dotenv/config. Al estar este archivo presente junto con las dependencias correctas en package.json, el error de "Cannot find module" no debería ocurrir aquí, siempre y cuando no se haya filtrado información confidencial en el repositorio público (lo cual debes verificar en tu auditoría, ya que los archivos .env nunca deben subirse a GitHub).
+
+🧠 Código Fuente y Lógica Central
+src\utils/: Al igual que antes, esta carpeta concentra la lógica operativa del proyecto.
+
+reportEngine.js: El motor que procesa las reglas de negocio o reportes del sistema. Al no haber interfaz gráfica (App.js), este archivo representa el núcleo duro del servicio.
+
+reportEngine.test.js: El archivo de pruebas unitarias encargado de validar que el motor de reportes funcione correctamente bajo diferentes escenarios.
+
+🐳 Contenedorización (Infraestructura)
+Dockerfile: Define la imagen base de Node.js, copia el código e instala las dependencias necesarias para empaquetar este servicio backend.
+
+docker-compose.yaml: Permite levantar y conectar el servicio cityfix con un solo comando. Al ser un proyecto puramente backend, es probable que este archivo configure los puertos de escucha para recibir peticiones HTTP o comunicarse con bases de datos.
+
+📦 Gestión de Dependencias y Control
+package.json & package-lock.json: Administran los scripts de ejecución (como npm test o npm start) y las librerías de Node.js requeridas por el backend.
+
+.gitignore: Indica qué archivos deben excluirse del control de versiones. Punto crítico a auditar: Asegúrate de que el archivo .env esté listado aquí dentro para que no se suba por error a producción o repositorios públicos.
+
+auditoria.txt: Tu archivo de trabajo actual donde estás recopilando estos apuntes.
+
+⚙️ NPM TEST:
+{
+        id: 'bd7316cd-e990-4a28-8a0f-e2c7f2a67675',
+        title: 'Hueco avenida principal',
+        category: 'Vías',
+        votes: 3,
+        created_at: '2026-05-30T23:29:25.090311+00:00'
+      }
+    
+
+      at Object.log (src/utils/reportEngine.test.js:10:13)
+
+ PASS  src/utils/reportEngine.test.js
+  CityFix - Supabase E2E
+    √ Debe obtener reportes desde Supabase (1343 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.967 s
+Ran all test suites.
+
+el funcionamiento del docker es correcto al igual del resultado de las pruebas 
